@@ -1,0 +1,10 @@
+//const add=prompt("please enter string to add","1");
+//const position=+prompt("please enter position,"1");
+let input = "This is a sample string";
+const add = "Insert me";
+const position = 3;
+const p1=input.slice(0,(position-1));
+const p2=input.slice((position-1),input.length);
+console.log(p1);
+console.log(p2);
+console.log(p1+add+p2);
