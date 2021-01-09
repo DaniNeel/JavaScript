@@ -1,6 +1,6 @@
-
+let input;
 while(true){
-     let input=prompt("Please Enter Number","1");    
+   input =+prompt("Please Enter Number","1");    
     if(isFinite(input) && input>0){
         break;
     }
@@ -16,5 +16,5 @@ for(let i=0;i<input.length-1;i++)
     }
     out.push(input[i+1]);
 }
-console.log(out.join(""));
+alert(out.join(""));
 

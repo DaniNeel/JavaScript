@@ -1,6 +1,6 @@
-
+var input;
 while(true){
-   var input=prompt("Please Enter positive Number","1");    
+   input=+prompt("Please Enter positive Number","1");    
    if(isFinite(input) && input>=0){
        break;
    }
@@ -17,4 +17,4 @@ function fillArray(a,b,jump)
     }
 }
 fillArray("a","q",input);
-console.log(out);
+alert(out);
