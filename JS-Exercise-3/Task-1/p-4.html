@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Table Generator</title>
+</head>
+
+<body>
+    <script>
+        function generateTable() {
+            const rowNumber = +prompt("please enter valid row number", "1");
+            const columnNumber = +prompt("please enter valid column number", "1");
+
+            for (let i = 0; i < rowNumber; i++) {
+                let r = document.getElementById("t1").insertRow(i);
+
+                for (let j = 0; j < columnNumber; j++) {
+                    let c = r.insertCell(j);
+                    let num = +prompt("please enter number for Row-" + i + " Column-" + j, "0");
+                    c.innerHTML = num;
+                }
+
+            }
+
+        }
+    </script>
+    <table id="t1" border="1">
+    </table>
+
+    <input type="button" onclick="generateTable()" value="Create Table">
+</body>
+</html>
