@@ -33,6 +33,7 @@ for (i = 0; i < array.length; i++) {
 
 }
 
+//convert into array of objects
 for (const ob in obj) {
     let outObj = {};
     outObj[ob] = obj[ob];

@@ -3,9 +3,9 @@
 const eMail = "abcdef@gmail.com";
 
 function hideEmail(email) {
-    let splitPart = email.split("@");
+    const splitPart = email.split("@");
     console.log(splitPart);
-    let mid = splitPart[0].length / 2;
+    const mid = splitPart[0].length / 2;
     console.log(splitPart[0].length);
 
     let firstElement = splitPart[0].slice(0, (mid - 1));
