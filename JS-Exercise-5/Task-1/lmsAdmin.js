@@ -38,7 +38,8 @@ function addData() {
 
     document.getElementById("dispCourse").innerHTML = "";
     document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
-   alert("Course added Successfully");
+    displayData();
+    alert("Course added Successfully");
 }
     }catch(error){
         alert(error);
