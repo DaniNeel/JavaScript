@@ -3,27 +3,34 @@
 const eMail = "abcdef@gmail.com";
 
 function hideEmail(email) {
-    const splitPart = email.split("@");
-    console.log(splitPart);
-    const mid = splitPart[0].length / 2;
-    console.log(splitPart[0].length);
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
+  
+    if(emailRegex.test(email))
+    {
+        const splitPart = email.split("@");
+        console.log(splitPart);
+        const mid = splitPart[0].length / 2;
+        console.log(splitPart[0].length);
 
-    let firstElement = splitPart[0].slice(0, (mid - 1));
-    let midElement = splitPart[0].substr((mid - 1), mid);
-    let endLength = firstElement.length + midElement.length;
-    let lastElement = splitPart[0].slice(endLength);
+        const firstElement = splitPart[0].slice(0, (mid - 1));
+        const midElement = splitPart[0].substr((mid - 1), mid);
+        const endLength = firstElement.length + midElement.length;
+        const lastElement = splitPart[0].slice(endLength);
 
-    console.log(firstElement);
-    console.log(midElement);
-    console.log(lastElement);
+        console.log(firstElement);
+        console.log(midElement);
+        console.log(lastElement);
 
-    let hidden = "";
-    for (let i = 0; i < midElement.length; i++) {
-        hidden += "*";
+        let hidden = "";
+        for (let i = 0; i < midElement.length; i++) {
+            hidden += "*";
+        }
+        console.log(hidden);
+
+        console.log(firstElement + hidden + lastElement + "@" + splitPart[1]);
+    }else{
+        console.log("please enter valid email");
     }
-    console.log(hidden);
-
-    console.log(firstElement + hidden + lastElement + "@" + splitPart[1]);
 }
 
 hideEmail(eMail);
