@@ -10,10 +10,12 @@ function loginUser()
         if(userRole=="Admin")
         {
             localStorage.setItem("sessionAdmin",userName);
+            alert("successfully login as Admin");
             window.location.replace("./lmsAdmin.html");
         }
         else{
             localStorage.setItem("sessionStudent",userName);
+            alert("successfully login as Student");
             window.location.replace("./lmsStudent.html");
         }
     }

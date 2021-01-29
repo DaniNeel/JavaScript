@@ -21,7 +21,7 @@ function registerUser()
                     {
                         let n=new Number(localStorage.getItem("totalUser"));
                         localStorage.setItem("totalUser",n+1);
-                            
+                     
                     }
                     else{
                         localStorage.setItem("totalUser",1);
@@ -33,13 +33,14 @@ function registerUser()
                     let objJson2=JSON.stringify(obj2);
                     localStorage.setItem(userName,objJson);
                     localStorage.setItem(`s${ns}`,objJson2);
+                    alert("Successfully Registerd");
                     window.location.replace("./Login.html");
                 }
                 else{
                     let obj={Password:userPassword,Role:userRole};
                     let objJson=JSON.stringify(obj);
                     localStorage.setItem(userName,objJson);
-                   
+                    alert("Successfully Registerd");
                     window.location.replace("./Login.html");
                 }
             }

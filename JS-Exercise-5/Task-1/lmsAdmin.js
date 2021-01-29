@@ -7,9 +7,15 @@ function logoutUser() {
 }
 
 function addData() {
-    let cName = document.getElementById("cname").value;
-    let cPath = document.getElementById("cimg").value;
-    if (localStorage.getItem("courseCount")) {
+    try{
+        let cName = document.getElementById("cname").value;
+        let cPath = document.getElementById("cimg").value;
+      if(cName=="" || cPath=="" || cName==" " || cPath==" " )
+      {
+        alert("both fields required");
+      }  
+   else{    
+       if (localStorage.getItem("courseCount")) {
         let cc = new Number(localStorage.getItem("courseCount"));
         let cId = `c${cc + 1}`;
         let objCourse = { Name: cName, Path: cPath };
@@ -32,12 +38,18 @@ function addData() {
 
     document.getElementById("dispCourse").innerHTML = "";
     document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
+   alert("Course added Successfully");
+}
+    }catch(error){
+        alert(error);
+    }
 }
 
 function displayData() {
     document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()" disabled>Display Courses</button> `;
 
     let ccount = new Number(localStorage.getItem("courseCount"));
+    let tU = new Number(localStorage.getItem("totalUser"));
     let divElement = document.getElementById("dispCourse");
     let divRow;
     for (let i = 1; i <= ccount; i++) {
@@ -85,16 +97,32 @@ function displayData() {
                 icardTitle1.innerText = "Delete Course";
                 icardTitle1.setAttribute("id", `del${i}`);//
                 icardTitle1.addEventListener("click", function () {
+                    try{
+                            let ctoDelete = `c${(this.id)[3]}`;
+                            let courseName=(JSON.parse(localStorage.getItem(ctoDelete))).Name;
+                            localStorage.removeItem(ctoDelete);
+                            let cdlete = new Number(localStorage.getItem("courseCount"));
+                        
+                        for(let s=0;s<tU;s++)
+                        {
+                            console.log("in for");
+                            if(localStorage.getItem(`s${s+1}`)){
+                                console.log("in if");
+                                    let student=JSON.parse(localStorage.getItem(`s${s+1}`));
+                                    console.log(student);
+                                    let Dindex = student.Course.indexOf(courseName);
+                                    student.Course.splice(Dindex, 1);
+                                    localStorage.setItem(`s${s+1}`,JSON.stringify(student));
+                            }
+                        }
 
-                    let ctoDelete = `c${(this.id)[3]}`;
-                    localStorage.removeItem(ctoDelete);
-                    let cdlete = new Number(localStorage.getItem("courseCount"));
-                   
-
-                   //document.getElementById(`col${(this.id)[3]}`).remove();
-                   document.getElementById("dispCourse").innerHTML="";
-                    document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
-                    
+                        //document.getElementById(`col${(this.id)[3]}`).remove();
+                        document.getElementById("dispCourse").innerHTML="";
+                            document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
+                            alert("course deleted");
+                        }catch(error){
+                        alert(error);
+                    }                            
 
                 });
 
@@ -150,17 +178,34 @@ function displayData() {
                 cardTitle1.setAttribute("id", `del${i}`);//
 
                 cardTitle1.addEventListener("click", function () {
-
-                    let ictoDelete = `c${(this.id)[3]}`;
-                    localStorage.removeItem(ictoDelete);
-                    let icdlete = new Number(localStorage.getItem("courseCount"));
-                   
-
-                   
-                 //document.getElementById(`col${(this.id)[3]}`).remove();
-                 document.getElementById("dispCourse").innerHTML="";
-                 document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
-
+                  try{
+                                let ictoDelete = `c${(this.id)[3]}`;
+                                let courseName=(JSON.parse(localStorage.getItem(ictoDelete))).Name;
+                                localStorage.removeItem(ictoDelete);
+                                let icdlete = new Number(localStorage.getItem("courseCount"));
+                            
+                            
+                                for(let s=0;s<tU;s++)
+                                {
+                                console.log("in for");
+                                if(localStorage.getItem(`s${s+1}`)){
+                                    console.log("in if");
+                                        let student=JSON.parse(localStorage.getItem(`s${s+1}`));
+                                        console.log(student);
+                                        let Dindex = student.Course.indexOf(courseName);
+                                        student.Course.splice(Dindex, 1);
+                                        localStorage.setItem(`s${s+1}`,JSON.stringify(student));
+                                }
+                                }
+                            
+                            //document.getElementById(`col${(this.id)[3]}`).remove();
+                            document.getElementById("dispCourse").innerHTML="";
+                            document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
+                            alert("course deleted");
+                        }
+                            catch(error){
+                                alert(error);
+                            }
 
                 });
 
@@ -220,16 +265,34 @@ function displayData() {
                 ecardTitle1.setAttribute("id", `del${i}`);//
 
                 ecardTitle1.addEventListener("click", function () {
+                           try{
+                            let ectoDelete = `c${(this.id)[3]}`;
+                            let courseName=(JSON.parse(localStorage.getItem(ectoDelete))).Name;
+                        
+                            localStorage.removeItem(ectoDelete);
+                            let ecdlete = new Number(localStorage.getItem("courseCount"));
+                            
+                        
+                            for(let s=0;s<tU;s++)
+                            {
+                            console.log("in for");
+                            if(localStorage.getItem(`s${s+1}`)){
+                                console.log("in if");
+                                    let student=JSON.parse(localStorage.getItem(`s${s+1}`));
+                                    console.log(student);
+                                    let Dindex = student.Course.indexOf(courseName);
+                                    student.Course.splice(Dindex, 1);
+                                    localStorage.setItem(`s${s+1}`,JSON.stringify(student));
+                            }
+                            }
 
-                    let ectoDelete = `c${(this.id)[3]}`;
-                    localStorage.removeItem(ectoDelete);
-                    let ecdlete = new Number(localStorage.getItem("courseCount"));
-                 
-
-                   // document.getElementById(`col${(this.id)[3]}`).remove();
-                   document.getElementById("dispCourse").innerHTML="";
-                   document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
-
+                        // document.getElementById(`col${(this.id)[3]}`).remove();
+                        document.getElementById("dispCourse").innerHTML="";
+                        document.getElementById("dispCourse").innerHTML = `<button type="button" id="dispBtn" class="btn btn-light border border-primary pl-3 pr-3 mb-5 ml-5" onclick="displayData()">Display Courses</button> `;
+                            alert("course deleted");
+                    }catch(error){
+                               alert(error);
+                           }
 
                 });
 

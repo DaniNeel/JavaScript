@@ -68,6 +68,7 @@ function addCourse(c) {
 
     stud.Course.push(c.name);
     localStorage.setItem(`s${btnId.substr(2, btnId.length)}`, JSON.stringify(stud));
+    alert("course assigned");
     window.location.reload();
 
 }
@@ -83,6 +84,7 @@ function removeCourse(c) {
         }
     }
     localStorage.setItem(`s${btnId.substr(2, btnId.length)}`, JSON.stringify(stud));
+    alert("course removed");
     window.location.reload();
 
 }
