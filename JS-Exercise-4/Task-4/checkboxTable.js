@@ -10,17 +10,17 @@ let newDiv = document.createElement("DIV");
 newDiv.id = "allDelete";
 
 //Add Data
-function addData() {
+const addData = () => {
 
-    let f = document.getElementById("fname").value;
-    let l = document.getElementById("lname").value;
-    if (f == "" || l == "") {
+    let f = document.getElementById("fname").value.trim().split(" ");
+    let l = document.getElementById("lname").value.trim().split(" ");
+    if (f[0] == "" || l[0] == "") {
         alert("FirstName And LastName Both Fields Are Required");
     }
     else {
 
 
-        let objAdd = f + l;
+        let objAdd = f[0] + l[0];
         totalRecords.push(objAdd);
         let row = document.createElement("TR");
         row.id = `row${rowCount}`;
@@ -39,22 +39,74 @@ function addData() {
         check.checked = false;
         check.addEventListener('change', function () {
             if (this.checked) {
-                c4.innerHTML = `<button type="button" class="btn btn-danger pl-5 pr-5" onClick="deleteData(this)">Delete</button>`;
+
+
+                let checCount = 0;
+                for (let i = 0; i < rowCount; i++) {
+
+                    if (document.getElementById(`check${i}`) != undefined) {
+                        if (document.getElementById(`check${i}`).checked == true) {
+                            checCount++;
+                        }
+
+                    }
+                }
+                document.getElementById("upCheckbox").appendChild(para);
+                para.textContent = `Total ${checCount} Rows Selected`;
+                document.getElementById("upCheckbox").appendChild(newDiv);
+                newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+
+                document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;" disabled><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+
+
+
+
+                if (checCount == totalRecords.length) {
+                    document.getElementById("selectAll").checked = true;
+                    document.getElementById("upCheckbox").appendChild(para);
+                    para.textContent = `Total ${totalRecords.length} Rows Selected`;
+                    document.getElementById("upCheckbox").appendChild(newDiv);
+                    newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+
+                    document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;" disabled><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+
+
+                }
 
             } else {
-                c4.innerHTML = `<button type="button" class="btn btn-danger pl-5 pr-5" onClick="deleteData(this)" disabled>Delete</button>`;
-                document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
-                document.getElementById("selectAll").checked = false;
-                para.textContent = "";
-                newDiv.innerHTML = "";
+                let checCount = 0;
+                for (let i = 0; i < rowCount; i++) {
 
+                    if (document.getElementById(`check${i}`) != undefined) {
+                        if (document.getElementById(`check${i}`).checked == true) {
+                            checCount++;
+                        }
+
+                    }
+                }
+                if (document.getElementById("selectAll").checked == true) {
+                    document.getElementById("selectAll").checked = false;
+                }
+                if (checCount > 0) {
+
+                    document.getElementById("upCheckbox").appendChild(para);
+                    para.textContent = `Total ${checCount} Rows Selected`;
+                    document.getElementById("upCheckbox").appendChild(newDiv);
+                    newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+                } else {
+
+                    document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+                    document.getElementById("selectAll").checked = false;
+                    para.textContent = "";
+                    newDiv.innerHTML = "";
+                }
             }
         });
 
 
         let fNameElement = document.createElement("INPUT");
         fNameElement.id = `fname${rowCount}`;
-        fNameElement.value = f;
+        fNameElement.value = f[0];
         fNameElement.readOnly = true;
         fNameElement.setAttribute("type", "text");
         fNameElement.classList.add("bg-light");
@@ -62,7 +114,7 @@ function addData() {
 
         let lNameElement = document.createElement("INPUT");
         lNameElement.id = `lname${rowCount}`;
-        lNameElement.value = l;
+        lNameElement.value = l[0];
         lNameElement.readOnly = true;
         lNameElement.setAttribute("type", "text");
         lNameElement.classList.add("bg-light");
@@ -73,7 +125,7 @@ function addData() {
         c2.appendChild(lNameElement);
         //let bid=`delete${rowCount}`;
         c3.innerHTML = `<button type="button"  class="btn btn-success pl-5 pr-5" onClick="editData(this)">Edit</button>`;
-        c4.innerHTML = `<button type="button"  class="btn btn-danger pl-5 pr-5" onClick="deleteData(this)" disabled>Delete</button>`;
+        c4.innerHTML = `<button type="button"  class="btn btn-danger pl-5 pr-5" onClick="deleteData(this)">Delete</button>`;
 
 
         row.appendChild(c0);
@@ -93,9 +145,20 @@ function addData() {
             let checkbox = document.querySelector("input[name=sa]");
             checkbox.addEventListener('change', function () {
                 if (this.checked) {
+                    let checCount3 = 0;
+                    for (let i = 0; i < rowCount; i++) {
+
+                        if (document.getElementById(`check${i}`) != undefined) {
+
+                            checCount3++;
+
+
+                        }
+                    }
+
 
                     document.getElementById("upCheckbox").appendChild(para);
-                    para.textContent = `Total ${totalRecords.length} Rows Selected`;
+                    para.textContent = `Total ${checCount3} Rows Selected`;
                     document.getElementById("upCheckbox").appendChild(newDiv);
                     newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
 
@@ -118,7 +181,7 @@ function addData() {
                         let diselement = document.getElementById(`check${c + 1}`);
                         if (typeof (diselement) != 'undefined' && diselement != null) {
                             diselement.checked = false;
-                            document.getElementById(`col${c + 1}`).children[0].disabled = true;
+
                         }
 
                     }
@@ -134,10 +197,10 @@ function addData() {
 
 
 //Delete Data
-function deleteData(delbutnElement) {
+const deleteData = (delbutnElement) => {
     let delId = delbutnElement.parentNode.parentNode.id;
-    let ftoDelete = document.getElementById(`fname${delId[3]}`).value;
-    let ltoDelete = document.getElementById(`lname${delId[3]}`).value;
+    let ftoDelete = document.getElementById(`fname${delId.substr(3)}`).value;
+    let ltoDelete = document.getElementById(`lname${delId.substr(3)}`).value;
     let objtoDelete = ftoDelete + ltoDelete;
     let Dindex = totalRecords.indexOf(objtoDelete);
     totalRecords.splice(Dindex, 1);
@@ -163,19 +226,42 @@ function deleteData(delbutnElement) {
 
     document.getElementById("fname").value = "";
     document.getElementById("lname").value = "";
-    document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+    let checCount2 = 0;
+    for (let i = 0; i < rowCount; i++) {
+
+        if (document.getElementById(`check${i}`) != undefined) {
+            if (document.getElementById(`check${i}`).checked == true) {
+                checCount2++;
+            }
+
+        }
+    }
+
+    if (checCount2 > 0) {
+
+        document.getElementById("upCheckbox").appendChild(para);
+        para.textContent = `Total ${checCount2} Rows Selected`;
+        document.getElementById("upCheckbox").appendChild(newDiv);
+        newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+    } else {
+
+        document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+        document.getElementById("selectAll").checked = false;
+        para.textContent = "";
+        newDiv.innerHTML = "";
+    }
 }
 
 //Edit Data
 let rowId;
 let ftoUpdate;
 let ltoUpdate;
-function editData(edibutnElement) {
+const editData = (edibutnElement) => {
     rowId = edibutnElement.parentNode.parentNode.id;
 
 
-    ftoUpdate = document.getElementById(`fname${rowId[3]}`).value;
-    ltoUpdate = document.getElementById(`lname${rowId[3]}`).value;
+    ftoUpdate = document.getElementById(`fname${rowId.substr(3)}`).value;
+    ltoUpdate = document.getElementById(`lname${rowId.substr(3)}`).value;
     document.getElementById("fname").value = ftoUpdate;
     document.getElementById("lname").value = ltoUpdate;
 
@@ -185,46 +271,86 @@ function editData(edibutnElement) {
 
 function updateData() {
 
-    let fUpdated = document.getElementById("fname").value;
-    let lUpdated = document.getElementById("lname").value;
-    let objUpdated = fUpdated + lUpdated;
+    let fUpdated = document.getElementById("fname").value.trim().split(" ");
+    let lUpdated = document.getElementById("lname").value.trim().split(" ");
+    let objUpdated = fUpdated[0] + lUpdated[0];
 
 
-    if (fUpdated == "" || lUpdated == "") {
+    if (fUpdated[0] == "" || lUpdated[0] == "") {
         alert("FirstName And LastName Both Fields Are Required")
     }
     else {
 
-        let objAddUpdated = fUpdated + lUpdated;
+        let objAddUpdated = fUpdated[0] + lUpdated[0];
         totalRecords.push(objAddUpdated);
 
         objtoRemove = ftoUpdate + ltoUpdate;
         let index = totalRecords.indexOf(objtoRemove);
         totalRecords.splice(index, 1);
 
-        document.getElementById(`fname${rowId[3]}`).value = fUpdated;
-        document.getElementById(`lname${rowId[3]}`).value = lUpdated;
+        document.getElementById(`fname${rowId.substr(3)}`).value = fUpdated[0];
+        document.getElementById(`lname${rowId.substr(3)}`).value = lUpdated[0];
         document.getElementById("fname").value = "";
         document.getElementById("lname").value = "";
+        let checCount4 = 0;
+        for (let i = 0; i < rowCount; i++) {
 
-        document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+            if (document.getElementById(`check${i}`) != undefined) {
+                if (document.getElementById(`check${i}`).checked == true) {
+                    checCount4++;
+                }
 
-
+            }
+        }
+        if (checCount4 > 0) {
+            document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;" disabled><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+            document.getElementById("pid").textContent = `Total ${totalRecords.length} Rows Selected`;
+        } else {
+            document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+        }
     }
 }
 
 //Delete All Data
-function deleteAllData() {
-    for (let t = 0; t < rowCount; t++) {
-        let rowElement = document.getElementById(`row${t + 1}`);
-        if (typeof (rowElement) != 'undefined' && rowElement != null) {
-            rowElement.remove();
+const deleteAllData = () => {
+
+
+    for (let i = 0; i < rowCount; i++) {
+
+        if (document.getElementById(`check${i}`) != undefined) {
+            if (document.getElementById(`check${i}`).checked == true) {
+                let fd = document.getElementById(`fname${i}`).value;
+                let ld = document.getElementById(`lname${i}`).value;
+                let objtoDelete = fd + ld;
+                let Dindex = totalRecords.indexOf(objtoDelete);
+                totalRecords.splice(Dindex, 1);
+                document.getElementById(`row${i}`).innerHTML = "";
+            }
+
         }
     }
-    rowCount = 1;
-    totalRecords.splice(0, totalRecords.length);
-    console.log(totalRecords);
-    document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+    let checCount2 = 0;
+    for (let i = 0; i < rowCount; i++) {
 
-    document.getElementById("upCheckbox").innerHTML = "";
+        if (document.getElementById(`check${i}`) != undefined) {
+            if (document.getElementById(`check${i}`).checked == true) {
+                checCount2++;
+            }
+
+        }
+    }
+
+    if (checCount2 > 0) {
+
+        document.getElementById("upCheckbox").appendChild(para);
+        para.textContent = `Total ${checCount2} Rows Selected`;
+        document.getElementById("upCheckbox").appendChild(newDiv);
+        newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+    } else {
+
+        document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
+        document.getElementById("selectAll").checked = false;
+        para.textContent = "";
+        newDiv.innerHTML = "";
+    }
 }
