@@ -238,11 +238,20 @@ const deleteData = (delbutnElement) => {
     }
 
     if (checCount2 > 0) {
-
-        document.getElementById("upCheckbox").appendChild(para);
-        para.textContent = `Total ${checCount2} Rows Selected`;
-        document.getElementById("upCheckbox").appendChild(newDiv);
-        newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+        if(checCount2==totalRecords.length)
+        {
+            document.getElementById("selectAll").checked = true;
+            document.getElementById("upCheckbox").appendChild(para);
+            para.textContent = `Total ${checCount2} Rows Selected`;
+            document.getElementById("upCheckbox").appendChild(newDiv);
+            newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+        }
+        else{
+            document.getElementById("upCheckbox").appendChild(para);
+            para.textContent = `Total ${checCount2} Rows Selected`;
+            document.getElementById("upCheckbox").appendChild(newDiv);
+            newDiv.innerHTML = `<button type="button" id=bid class="btn btn-danger pl-5 pr-5" onClick="deleteAllData()">Delete All</button>`;
+            }
     } else {
 
         document.getElementById("btnDiv").innerHTML = `<button type="button" id="addBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="addData()" style="color:blue;"><i class="fa fa-plus-circle pr-2" aria-hidden="true"></i>Add</button>`;
