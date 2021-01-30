@@ -12,15 +12,15 @@ newDiv.id = "allDelete";
 //Add Data
 const addData = () => {
 
-    let f = document.getElementById("fname").value.trim().split(" ");
-    let l = document.getElementById("lname").value.trim().split(" ");
+    const f = document.getElementById("fname").value.trim().split(" ");
+    const l = document.getElementById("lname").value.trim().split(" ");
     if (f[0] == "" || l[0] == "") {
         alert("FirstName And LastName Both Fields Are Required");
     }
     else {
 
 
-        let objAdd = f[0] + l[0];
+       const objAdd = f[0] + l[0];
         totalRecords.push(objAdd);
         let row = document.createElement("TR");
         row.id = `row${rowCount}`;
@@ -199,8 +199,8 @@ const addData = () => {
 //Delete Data
 const deleteData = (delbutnElement) => {
     let delId = delbutnElement.parentNode.parentNode.id;
-    let ftoDelete = document.getElementById(`fname${delId.substr(3)}`).value;
-    let ltoDelete = document.getElementById(`lname${delId.substr(3)}`).value;
+   const ftoDelete = document.getElementById(`fname${delId.substr(3)}`).value;
+    const ltoDelete = document.getElementById(`lname${delId.substr(3)}`).value;
     let objtoDelete = ftoDelete + ltoDelete;
     let Dindex = totalRecords.indexOf(objtoDelete);
     totalRecords.splice(Dindex, 1);
@@ -271,9 +271,9 @@ const editData = (edibutnElement) => {
 
 function updateData() {
 
-    let fUpdated = document.getElementById("fname").value.trim().split(" ");
-    let lUpdated = document.getElementById("lname").value.trim().split(" ");
-    let objUpdated = fUpdated[0] + lUpdated[0];
+    const fUpdated = document.getElementById("fname").value.trim().split(" ");
+    const lUpdated = document.getElementById("lname").value.trim().split(" ");
+
 
 
     if (fUpdated[0] == "" || lUpdated[0] == "") {

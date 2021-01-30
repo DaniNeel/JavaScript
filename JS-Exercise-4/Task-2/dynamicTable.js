@@ -3,8 +3,8 @@
 let rowCount = 1;
 const addData = () => {
 
-    let firstName = document.getElementById("fname").value.trim().split(" ");
-    let lastName = document.getElementById("lname").value.trim().split(" ");
+    const firstName = document.getElementById("fname").value.trim().split(" ");
+    const lastName = document.getElementById("lname").value.trim().split(" ");
     console.log(firstName);
     if (firstName[0] == "" || lastName[0] == "") {
         alert("FirstName And LastName Both Fields Are Required")
@@ -71,19 +71,15 @@ const deleteData = (delbutnElement) => {
 let rowId;
 const editData = (edibutnElement) => {
     rowId = edibutnElement.parentNode.parentNode.id;
-
-
-
-
-    document.getElementById("fname").value = document.getElementById(`fname${rowId[3]}`).value;
+     document.getElementById("fname").value = document.getElementById(`fname${rowId[3]}`).value;
     document.getElementById("lname").value = document.getElementById(`lname${rowId[3]}`).value;
 
 
     document.getElementById("btnDiv").innerHTML = `<button type="button" id="updateBtn" class="btn btn-default border border-primary pl-5 pr-5 ml-5" onclick="updateData()" style="color:blue;">Update</button>`
 }
 const updateData = () => {
-    let firstName = document.getElementById("fname").value.trim().split(" ");
-    let lastName = document.getElementById("lname").value.trim().split(" ");
+    const firstName = document.getElementById("fname").value.trim().split(" ");
+    const lastName = document.getElementById("lname").value.trim().split(" ");
     if (firstName[0] == "" || lastName[0] == "") {
         alert("FirstName And LastName Both Fields Are Required")
     }

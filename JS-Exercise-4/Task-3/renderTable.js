@@ -12,7 +12,7 @@ const renderData = () => {
         }
         else {
 
-            let objAddRender = array[i].firstName + array[i].lastName;
+            const objAddRender = array[i].firstName + array[i].lastName;
             duplicateCheck.push(objAddRender);
 
             let row = document.createElement("TR");
@@ -65,8 +65,8 @@ const renderData = () => {
 
 const addData = () => {
 
-    let f = document.getElementById("fname").value.trim().split(" ");
-    let l = document.getElementById("lname").value.trim().split(" ");
+    const f = document.getElementById("fname").value.trim().split(" ");
+    const l = document.getElementById("lname").value.trim().split(" ");
     if (f[0] == "" || l[0] == "") {
         alert("FirstName And LastName Both Fields Are Required");
     }
@@ -82,7 +82,7 @@ const addData = () => {
         }
         else {
 
-            let objAdd = f[0] + l[0];
+            const objAdd = f[0] + l[0];
             duplicateCheck.push(objAdd);
             console.log(duplicateCheck);
             let row = document.createElement("TR");
@@ -168,9 +168,9 @@ const editData = (edibutnElement) => {
 
 const updateData = () => {
 
-    let fUpdated = document.getElementById("fname").value.trim().split(" ");
-    let lUpdated = document.getElementById("lname").value.trim().split(" ");
-    let objUpdated = fUpdated[0] + lUpdated[0];
+    const fUpdated = document.getElementById("fname").value.trim().split(" ");
+    const lUpdated = document.getElementById("lname").value.trim().split(" ");
+    const objUpdated = fUpdated[0] + lUpdated[0];
 
 
     if (fUpdated[0] == "" || lUpdated[0] == "") {
@@ -188,7 +188,7 @@ const updateData = () => {
         }
         else {
 
-            let objAddUpdated = fUpdated[0 + lUpdated[0];
+            let objAddUpdated = fUpdated[0] + lUpdated[0];
             duplicateCheck.push(objAddUpdated);
 
             objtoRemove = ftoUpdate + ltoUpdate;
